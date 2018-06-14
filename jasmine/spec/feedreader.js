@@ -30,7 +30,7 @@ $(function() {
             // Loop over allFeeds object and check if url is defined and not empty
             for (let feed of allFeeds) {
                 expect(feed.url).toBeDefined();
-                expect(feed.url.length).not.toBe(0)
+                expect(feed.url.length).not.toBe(0);
             }
         });
 
@@ -41,7 +41,7 @@ $(function() {
             // Loop over allFeeds object and check if name is defined and not empty
             for (let feed of allFeeds) {
                 expect(feed.name).toBeDefined();
-                expect(feed.name.length).not.toBe(0)
+                expect(feed.name.length).not.toBe(0);
             }
         });
     });
@@ -59,7 +59,7 @@ $(function() {
         // Asynchronous request
         beforeEach(function () {
             body = $('body');
-            menuIcon = $('.menu-icon-link')
+            menuIcon = $('.menu-icon-link');
         });
 
         /* It tests if the menu element is hidden by default.
@@ -77,7 +77,7 @@ $(function() {
             expect(body.hasClass('menu-hidden')).toBe(false);
             menuIcon.trigger('click');
             expect(body.hasClass('menu-hidden')).toBe(true);
-        })
+        });
     });
 
     /* This is a suite for testing the initial entries.
@@ -98,10 +98,9 @@ $(function() {
         /* It tests if the loadFeed function when called has at least  
          * one entry within the feed container.
          */
-        it('are loaded', function (done) {
+        it('are loaded', function () {
             expect(entry.length).toBeGreaterThan(0);
-            done();
-        })
+        });
     });
 
     /* This is a suite for testing the content changes in feed.
@@ -114,22 +113,21 @@ $(function() {
 
         // Asynchronous request
         beforeEach(function (done) {
-            // Loop over each initial entry and append to an array the innerText
-            oldFeed = $('.entry').toArray().map(function(i){ return i.innerText });
-            $('.feed').empty();
-            
-            loadFeed(1, function () {
-                // Loop over each loaded entry and append to an array the innerText
-                newFeed = $('.entry').toArray().map(function(i){ return i.innerText });
-                done();
+            loadFeed(0, function () {
+                // Loop over each initial entry and append to an array the innerText
+                oldFeed = $('.entry').toArray().map(function(i){ return i.innerText });
+                loadFeed(1, function () {
+                    // Loop over each loaded entry and append to an array the innerText
+                    newFeed = $('.entry').toArray().map(function(i){ return i.innerText });
+                    done();
+                })
             });
         });
 
         /* It tests if the new selected feed is diferent from the previous.
          */
-        it('is different from previous', function (done) {
+        it('is different from previous', function () {
             expect(oldFeed).not.toEqual(newFeed);
-            done();
-        })
-    })
+        });
+    });
 }());
